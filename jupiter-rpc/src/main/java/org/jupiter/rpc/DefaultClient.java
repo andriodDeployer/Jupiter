@@ -33,7 +33,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import static org.jupiter.common.util.Preconditions.checkNotNull;
 
 /**
- * Jupiter默认客户端实现.
+ * Jupiter默认客户端实现.哈手动阀手动阀
  *
  * jupiter
  * org.jupiter.rpc

@@ -35,7 +35,7 @@ public class JConnectionManager {
 
     private static final InternalLogger logger = InternalLoggerFactory.getInstance(JConnectionManager.class);
 
-    private final ConcurrentMap<UnresolvedAddress, CopyOnWriteArrayList<JConnection>> connections = Maps.newConcurrentMap();
+    private final ConcurrentMap<UnresolvedAddress, CopyOnWriteArrayList<JConnection>> connections = Maps.newConcurrentMap();//某个地址定义的多个channel
 
     /**
      * 设置为由jupiter自动管理连接

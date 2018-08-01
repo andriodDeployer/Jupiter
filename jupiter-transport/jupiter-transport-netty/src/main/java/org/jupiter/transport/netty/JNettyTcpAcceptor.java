@@ -145,7 +145,7 @@ public class JNettyTcpAcceptor extends NettyTcpAcceptor {
     public ChannelFuture bind(SocketAddress localAddress) {
         ServerBootstrap boot = bootstrap();
 
-        initChannelFactory();
+        initChannelFactory();//完成channelFactory的设定
 
         boot.childHandler(new ChannelInitializer<Channel>() {
 

@@ -42,7 +42,7 @@ public interface JClient extends Registry {
     String appName();
 
     /**
-     * 网络层connector.
+     * 获取网络层connector.
      */
     JConnector<JConnection> connector();
 

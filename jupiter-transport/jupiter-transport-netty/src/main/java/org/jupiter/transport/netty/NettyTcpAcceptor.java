@@ -49,7 +49,7 @@ public abstract class NettyTcpAcceptor extends NettyAcceptor {
     public NettyTcpAcceptor(int port) {
         super(Protocol.TCP, new InetSocketAddress(port));
         isNative = false;
-        init();
+        init();//完成EventGroup的绑定
     }
 
     public NettyTcpAcceptor(SocketAddress localAddress) {

@@ -111,7 +111,7 @@ public class DefaultClient implements JClient {
     public JConnector.ConnectionWatcher watchConnections(Class<?> interfaceClass, String version) {
         checkNotNull(interfaceClass, "interfaceClass");
         ServiceProvider annotation = interfaceClass.getAnnotation(ServiceProvider.class);
-        checkNotNull(annotation, interfaceClass + " is not a ServiceProvider interface");
+        checkNotNull(annotation, interfaceClass + " is not a ServiceProvider interface ");
         String providerName = annotation.name();
         providerName = Strings.isNotBlank(providerName) ? providerName : interfaceClass.getName();
         version = Strings.isNotBlank(version) ? version : JConstants.DEFAULT_VERSION;

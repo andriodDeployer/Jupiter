@@ -64,11 +64,11 @@ public class Client1 {
                 .newProxyInstance();
 
         try {
-            System.out.println(service.call1("test1"));
-            System.out.println(service.call1("test2"));
-            System.out.println(service.call1("test3"));
-            System.out.println(service.call1("test4"));
-            System.out.println(service.call1("test5"));
+                System.out.println(service.call1("test1"));
+                System.out.println(service.call1("test2"));
+                System.out.println(service.call1("test3"));
+                System.out.println(service.call1("test4"));
+                System.out.println(service.call1("test5"));
         } catch (Exception e) {
             e.printStackTrace();
         }

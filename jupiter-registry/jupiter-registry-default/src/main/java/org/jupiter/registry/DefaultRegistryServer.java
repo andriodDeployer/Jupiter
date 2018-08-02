@@ -241,7 +241,6 @@ public final class DefaultRegistryServer extends NettyTcpAcceptor implements Reg
                 msg.data(Pair.of(serviceMeta, meta));
 
                 subscriberChannels.writeAndFlush(msg, new ChannelMatcher() {
-
                     @Override
                     public boolean matches(Channel channel) {
                         boolean doSend = isChannelSubscribeOnServiceMeta(serviceMeta, channel);
@@ -422,6 +421,7 @@ public final class DefaultRegistryServer extends NettyTcpAcceptor implements Reg
     }
 
     /**
+     *
      * <pre>
      * **************************************************************************************************
      *                                          Protocol
@@ -440,7 +440,9 @@ public final class DefaultRegistryServer extends NettyTcpAcceptor implements Reg
      * + 8 // 消息 id, long 类型
      * + 4 // 消息体 body 长度, int 类型
      * </pre>
+     *
      */
+
     static class MessageDecoder extends ReplayingDecoder<MessageDecoder.State> {
 
         public MessageDecoder() {

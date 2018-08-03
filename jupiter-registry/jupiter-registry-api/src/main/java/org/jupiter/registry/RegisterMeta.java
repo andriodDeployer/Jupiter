@@ -17,6 +17,7 @@
 package org.jupiter.registry;
 
 /**
+ *
  * Registry server register meta information.
  *
  * 注意: 不要轻易修改成员变量, 否则将影响hashCode和equals, RegisterMeta需要经常放入List, Map等容器中.

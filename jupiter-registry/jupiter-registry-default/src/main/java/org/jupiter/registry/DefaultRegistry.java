@@ -286,6 +286,7 @@ public final class DefaultRegistry extends NettyTcpConnector {
 
     /**
      * <pre>
+     *
      * **************************************************************************************************
      *                                          Protocol
      *  ┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┐
@@ -302,6 +303,7 @@ public final class DefaultRegistry extends NettyTcpConnector {
      * + 1 // 空
      * + 8 // 消息 id, long 类型
      * + 4 // 消息体 body 长度, int 类型
+     *
      * </pre>
      */
     static class MessageDecoder extends ReplayingDecoder<MessageDecoder.State> {

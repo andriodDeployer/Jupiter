@@ -88,7 +88,7 @@ public final class DefaultRegistryServer extends NettyTcpAcceptor implements Reg
 
     // handlers
     private final AcceptorIdleStateTrigger idleStateTrigger = new AcceptorIdleStateTrigger();
-    private final MessageHandler handler = new MessageHandler();
+    private final MessageHandler handler = new MessageHandler();//消息处理的handler
     private final MessageEncoder encoder = new MessageEncoder();
     private final AcknowledgeEncoder ackEncoder = new AcknowledgeEncoder();
 
@@ -224,7 +224,7 @@ public final class DefaultRegistryServer extends NettyTcpAcceptor implements Reg
 
         logger.info("Publish {} on channel{}.", meta, channel);
 
-        attachPublishEventOnChannel(meta, channel);
+        attachPublishEventOnChannel(meta, channel);//将channel发布的服务放到channle身上
 
         final RegisterMeta.ServiceMeta serviceMeta = meta.getServiceMeta();
         ConfigWithVersion<ConcurrentMap<RegisterMeta.Address, RegisterMeta>> config =
@@ -240,6 +240,7 @@ public final class DefaultRegistryServer extends NettyTcpAcceptor implements Reg
                 msg.version(config.newVersion()); // 版本号+1
                 msg.data(Pair.of(serviceMeta, meta));
 
+                //只对channelGroup中部分channel进行数据发送，至于哪部分，又channelMatcher来区分。向订阅过这个服务的(可能这个服务的提供者出现问题，现在这个服务又被重新发布)的客户端，发送消息。
                 subscriberChannels.writeAndFlush(msg, new ChannelMatcher() {
                     @Override
                     public boolean matches(Channel channel) {
@@ -279,7 +280,7 @@ public final class DefaultRegistryServer extends NettyTcpAcceptor implements Reg
 
                 final Message msg = new Message(serializerType.value());
                 msg.messageCode(JProtocolHeader.PUBLISH_CANCEL_SERVICE);
-                msg.version(config.newVersion()); // 版本号+1
+                msg.version(config.newVersion()); // 版本号+1,消息的版本号
                 msg.data(Pair.of(serviceMeta, data));
 
                 subscriberChannels.writeAndFlush(msg, new ChannelMatcher() {

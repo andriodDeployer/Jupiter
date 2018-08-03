@@ -325,6 +325,7 @@ public final class Reflects {
 
     /**
      * Checks if one {@link Class} can be assigned to a variable of another {@link Class}.
+     * cls是否可以给toClass进行赋值。
      */
     public static boolean isAssignable(Class<?> cls, final Class<?> toClass, final boolean autoboxing) {
         if (toClass == null) {

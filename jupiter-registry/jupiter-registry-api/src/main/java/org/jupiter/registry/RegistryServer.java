@@ -42,7 +42,7 @@ public interface RegistryServer extends RegistryMonitor {
     class Default {
 
         private static final Class<RegistryServer> defaultRegistryClass;
-        private static final List<Class<?>[]> allConstructorsParameterTypes;
+        private static final List<Class<?>[]> allConstructorsParameterTypes;//将每个构造器的参数(一个数组)放到一个list中
 
         static {
             Class<RegistryServer> cls;

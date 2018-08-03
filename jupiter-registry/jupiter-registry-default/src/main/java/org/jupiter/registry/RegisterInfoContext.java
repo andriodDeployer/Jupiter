@@ -42,6 +42,7 @@ public class RegisterInfoContext {
     private final ConcurrentMap<RegisterMeta.Address, ConcurrentSet<RegisterMeta.ServiceMeta>>
             globalServiceMetaMap = Maps.newConcurrentMap();
 
+//发布者注册的服务信息
     public ConfigWithVersion<ConcurrentMap<RegisterMeta.Address, RegisterMeta>> getRegisterMeta
             (RegisterMeta.ServiceMeta serviceMeta) {
 

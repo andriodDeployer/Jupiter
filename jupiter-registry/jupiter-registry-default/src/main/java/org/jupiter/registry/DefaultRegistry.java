@@ -82,7 +82,7 @@ public final class DefaultRegistry extends NettyTcpConnector {
 
     {
         SerializerType expected = SerializerType.parse(SystemPropertyUtil.get("jupiter.registry.default.serializer_type"));
-        serializerType = expected == null ? SerializerType.getDefault() : expected;
+        serializerType = expected == null ? SerializerType.getDefault() : expected ;
     }
 
     private final AbstractRegistryService registryService;
@@ -145,7 +145,6 @@ public final class DefaultRegistry extends NettyTcpConnector {
                         ch.pipeline().addLast(watchdog.handlers());
                     }
                 });
-
                 future = boot.connect(socketAddress);
             }
 

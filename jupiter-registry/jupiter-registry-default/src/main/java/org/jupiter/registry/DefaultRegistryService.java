@@ -38,6 +38,7 @@ import static org.jupiter.common.util.Preconditions.checkNotNull;
  *
  * @author jiachun.fjc
  */
+
 @SpiMetadata(name = "default")
 public class DefaultRegistryService extends AbstractRegistryService {
 
@@ -67,7 +68,7 @@ public class DefaultRegistryService extends AbstractRegistryService {
         for (DefaultRegistry c : allClients) {
             c.doRegister(meta);
         }
-        getRegisterMetaMap().put(meta, RegisterState.DONE);
+        getRegisterMetaMap().put(meta, RegisterState.DONE);//本地存放一份,放的有些早了，因为有可能并没有发送成功，但是本地却增加了一份。
     }
 
     @SuppressWarnings("all")

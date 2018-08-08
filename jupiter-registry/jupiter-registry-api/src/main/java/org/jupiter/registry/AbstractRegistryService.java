@@ -142,7 +142,7 @@ public abstract class AbstractRegistryService implements RegistryService {
             }
         }
         listeners.add(listener);
-
+//abstractRegistryService属于一个client，subscribeset表示一个消费者客户端订阅的所有服务。
         subscribeSet.add(serviceMeta);
         doSubscribe(serviceMeta);
     }
@@ -229,7 +229,7 @@ public abstract class AbstractRegistryService implements RegistryService {
         }
     }
 
-    // 通知新增或删除服务
+    // 通知新增或删除服务,发布/取消服务成功的回掉通知.
     protected void notify(
             RegisterMeta.ServiceMeta serviceMeta, NotifyListener.NotifyEvent event, long version, RegisterMeta... array) {
 

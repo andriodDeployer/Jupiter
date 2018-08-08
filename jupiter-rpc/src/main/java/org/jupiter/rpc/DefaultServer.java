@@ -287,6 +287,7 @@ public class DefaultServer implements JServer {
         return wrapper;
     }
 
+    //将一个实现类(服务)对象包装成ServiceWrapper对象，因为服务注册中心接收的服务，不是单纯的服务对象，而是一个serviceWapper
     class DefaultServiceRegistry implements ServiceRegistry {
 
         private Object serviceProvider;                     // 服务对象
@@ -446,7 +447,8 @@ public class DefaultServer implements JServer {
     /**
      * Local service provider container.
      *
-     * 本地provider容器
+     * 本地provider容器，在本地将服务保存一份
+     * 和注册中心一样，都是服务都是ServiceWapper
      */
     interface ServiceProviderContainer {
 

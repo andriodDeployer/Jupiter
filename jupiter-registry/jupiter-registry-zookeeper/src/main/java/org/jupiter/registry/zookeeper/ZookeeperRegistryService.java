@@ -69,7 +69,7 @@ public class ZookeeperRegistryService extends AbstractRegistryService {
     private final int connectionTimeoutMs = SystemPropertyUtil.getInt("jupiter.registry.zookeeper.connectionTimeoutMs", 15 * 1000);
 
     private final ConcurrentMap<RegisterMeta.ServiceMeta, PathChildrenCache> pathChildrenCaches = Maps.newConcurrentMap();
-    // 指定节点都提供了哪些服务
+    // 指定节点都提供了哪些服务,在内存中缓存了一份
     private final ConcurrentMap<Address, ConcurrentSet<RegisterMeta.ServiceMeta>> serviceMetaMap = Maps.newConcurrentMap();
 
     private CuratorFramework configClient;
@@ -123,6 +123,7 @@ public class ZookeeperRegistryService extends AbstractRegistryService {
                                 RegisterMeta.ServiceMeta serviceMeta = registerMeta.getServiceMeta();
                                 ConcurrentSet<RegisterMeta.ServiceMeta> serviceMetaSet = getServiceMeta(address);
 
+                                //本地也存放一份.这个保证了存放的一定放到了zk上了.
                                 serviceMetaSet.add(serviceMeta);
                                 ZookeeperRegistryService.super.notify(
                                         serviceMeta,
@@ -195,7 +196,7 @@ public class ZookeeperRegistryService extends AbstractRegistryService {
         try {
             meta.setHost(address);
 
-            // The znode will be deleted upon the client's disconnect.
+            // The znode will be deleted upon the client's disconnect.//都是临时节点
             configClient.create().withMode(CreateMode.EPHEMERAL).inBackground(new BackgroundCallback() {
 
                 @Override
@@ -309,6 +310,7 @@ public class ZookeeperRegistryService extends AbstractRegistryService {
 
                 if (newState == ConnectionState.RECONNECTED) {
 
+    //因为节点都是临时的
                     logger.info("Zookeeper connection has been re-established, will re-subscribe and re-register.");
 
                     // 重新订阅

@@ -52,7 +52,7 @@ public interface JClient extends Registry {
     JClient withConnector(JConnector<JConnection> connector);
 
     /**
-     * 注册服务实例
+     * 获取注册服务实例
      */
     RegistryService registryService();
 
@@ -92,7 +92,8 @@ public interface JClient extends Registry {
     boolean awaitConnections(Directory directory, long timeoutMillis);
 
     /**
-     * 从注册中心订阅一个服务.
+     * 从注册中心订阅一个服务.+
+     *
      */
     void subscribe(Directory directory, NotifyListener listener);
 

@@ -20,7 +20,7 @@ import org.jupiter.transport.Directory;
 import org.jupiter.rpc.model.metadata.ServiceWrapper;
 
 /**
- * Lookup the service.
+ * Lookup the service.服务查找者
  *
  * jupiter
  * org.jupiter.rpc.provider

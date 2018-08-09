@@ -23,6 +23,7 @@ import java.io.Serializable;
 /**
  * Jupiter
  * org.jupiter.rpc.model.metadata
+ * 一个简单的bean对象，主要用来保存容错方式和重试次数。
  *
  * @author jiachun.fjc
  */

@@ -39,7 +39,7 @@ public abstract class AbstractInvoker {
         JRequest request = createRequest(methodName, args);
         ClusterInvoker invoker = clusterStrategyBridging.findClusterInvoker(methodName);
 
-        Context invokeCtx = new Context(invoker, returnType, sync);
+        Context invokeCtx = new Context(invoker, returnType, sync);//context可以理解成一个bean，这个bean中包含了很多的信息。通常bean中的方法还是静态的，让其他模块可以从context中获取需要的信息
         Chains.invoke(request, invokeCtx);
 
         return invokeCtx.getResult();

@@ -45,6 +45,7 @@ public enum Proxies {
             return interfaceType.cast(object);
         }
     }),
+
     BYTE_BUDDY(new ProxyDelegate() {
 
         @Override

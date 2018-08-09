@@ -122,6 +122,9 @@ abstract class AbstractDispatcher implements Dispatcher {
         return timeoutMillis;
     }
 
+    //根据servicemetadata，根据负载均衡策略选择一个channel
+    //因为这个方法，所有的子类共用，所以，这个方法实现在这里，让子类使用，而不是定义在接口中，
+    //这也是为什么在实现类和接口之间再增加一个抽象父类的原因。就是为了提供一些，共用的方法。
     protected JChannel select(ServiceMetadata metadata) {
         CopyOnWriteGroupList groups = client
                 .connector()

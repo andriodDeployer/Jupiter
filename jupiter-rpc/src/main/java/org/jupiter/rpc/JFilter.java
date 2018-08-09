@@ -34,4 +34,5 @@ public interface JFilter {
         PROVIDER,
         ALL
     }
+
 }

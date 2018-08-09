@@ -80,11 +80,11 @@ public class ProxyFactory<I> {
     // 调用超时时间设置
     private long timeoutMillis;
     // 指定方法的单独配置, 方法参数类型不做区别对待
-    private List<MethodSpecialConfig> methodSpecialConfigs;
+    private List<MethodSpecialConfig> methodSpecialConfigs;//代理对象中的所有方法的配置信息。
     // 消费者端拦截器
-    private List<ConsumerInterceptor> interceptors;
+    private List<ConsumerInterceptor> interceptors; //消费者端的拦截器，
     // 集群容错策略
-    private ClusterInvoker.Strategy strategy = ClusterInvoker.Strategy.getDefault();
+    private ClusterInvoker.Strategy strategy = ClusterInvoker.Strategy.getDefault();//如果有些方法没有配置的话容错策略的话，就是用这个做为默认策略。
     // failover重试次数
     private int retries = 2;
 
@@ -229,13 +229,13 @@ public class ProxyFactory<I> {
             connector.addChannelGroup(metadata, connector.group(address));
         }
 
-        // dispatcher
+        // dispatcher 一个代理对象对应一个Dispatcher，对应一个高层调用器。
         Dispatcher dispatcher = dispatcher()
                 .interceptors(interceptors)
                 .timeoutMillis(timeoutMillis)
                 .methodSpecialConfigs(methodSpecialConfigs);
 
-        ClusterStrategyConfig strategyConfig = ClusterStrategyConfig.of(strategy, retries);
+        ClusterStrategyConfig strategyConfig = ClusterStrategyConfig.of(strategy, retries);//代理对象默认的容错和重试对象，如果该对象中的方法没有指明容错和重试的话，就是用对象中的这个对象做为默认值。
         Object handler;
         switch (invokeType) {
             case SYNC:

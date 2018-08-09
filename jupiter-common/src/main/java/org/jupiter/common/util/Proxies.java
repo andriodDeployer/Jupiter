@@ -30,9 +30,10 @@ import static org.jupiter.common.util.Preconditions.checkArgument;
  * jupiter
  * org.jupiter.common.util
  *
- * @author jiachun.fjc
+ * @author jiac.fjc
  */
 public enum Proxies {
+
     JDK_PROXY(new ProxyDelegate() {
 
         @Override

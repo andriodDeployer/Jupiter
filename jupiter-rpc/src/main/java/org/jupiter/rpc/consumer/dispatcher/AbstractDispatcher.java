@@ -106,7 +106,7 @@ abstract class AbstractDispatcher implements Dispatcher {
         if (!methodSpecialConfigs.isEmpty()) {
             for (MethodSpecialConfig config : methodSpecialConfigs) {
                 long timeoutMillis = config.getTimeoutMillis();
-                if (timeoutMillis > 0) {
+                if (timeoutMillis > 0) {//过滤掉超时时间很小的。
                     methodSpecialTimeoutMapping.put(config.getMethodName(), timeoutMillis);
                 }
             }

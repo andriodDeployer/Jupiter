@@ -22,6 +22,8 @@ import java.io.Serializable;
  * Jupiter
  * org.jupiter.rpc.model.metadata
  *
+ * 保存一个方法的配置信息：容错策略，超时时间，方法名称。
+ *
  * @author jiachun.fjc
  */
 public class MethodSpecialConfig implements Serializable {

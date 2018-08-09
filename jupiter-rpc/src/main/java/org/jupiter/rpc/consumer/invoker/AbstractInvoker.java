@@ -36,12 +36,12 @@ public abstract class AbstractInvoker {
     }
 
     protected Object doInvoke(String methodName, Object[] args, Class<?> returnType, boolean sync) throws Throwable {
+
         JRequest request = createRequest(methodName, args);
         ClusterInvoker invoker = clusterStrategyBridging.findClusterInvoker(methodName);
-
         Context invokeCtx = new Context(invoker, returnType, sync);//context可以理解成一个bean，这个bean中包含了很多的信息。通常bean中的方法还是静态的，让其他模块可以从context中获取需要的信息
-        Chains.invoke(request, invokeCtx);
 
+        Chains.invoke(request, invokeCtx);
         return invokeCtx.getResult();
     }
 
@@ -133,6 +133,8 @@ public abstract class AbstractInvoker {
         }
     }
 
+    //因为这个Chains是AbstractInvoker的内部内，所以它提供的功能实用性也是很窄的，也就被AbstractInvocker和它的子类进行使用。
+    //无论是AbstractInvoker还是它的子类，使用的chain中的filter，仅仅需要ClusterInvokerFilter，所以这个chaine实现也是写死的，
     static class Chains {
 
         private static final JFilterChain headChain;

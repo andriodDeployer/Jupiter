@@ -46,7 +46,7 @@ public class DisruptorExecutorFactory extends AbstractExecutorFactory {
                 waitStrategyType(target, WaitStrategyType.LITE_BLOCKING_WAIT),
                 "jupiter");
 
-        return new CloseableExecutor() {
+        return new CloseableExecutor() {//匿名内部类
 
             @Override
             public void execute(Runnable r) {

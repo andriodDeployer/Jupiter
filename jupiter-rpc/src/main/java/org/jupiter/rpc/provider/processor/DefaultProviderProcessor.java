@@ -46,7 +46,7 @@ public abstract class DefaultProviderProcessor implements ProviderProcessor, Loo
 
     private static final InternalLogger logger = InternalLoggerFactory.getInstance(DefaultProviderProcessor.class);
 
-    private final CloseableExecutor executor;
+    private final CloseableExecutor executor;//业务线程池
 
     public DefaultProviderProcessor() {
         this(ProviderExecutors.executor());
@@ -57,12 +57,12 @@ public abstract class DefaultProviderProcessor implements ProviderProcessor, Loo
     }
 
     @Override
-    public void handleRequest(JChannel channel, JRequestPayload requestPayload) throws Exception {
-        MessageTask task = new MessageTask(this, channel, new JRequest(requestPayload));
+    public void handleRequest(JChannel channel, JRequestPayload requestPayload) throws Exception {//执行这个方法在io线程中
+        MessageTask task = new MessageTask(this, channel, new JRequest(requestPayload));//将业务逻辑封装成task里面
         if (executor == null) {
             task.run();
         } else {
-            executor.execute(task);
+            executor.execute(task);//executor是一个线程池(业务线程池，防止业务时间过程，耗费io线程时间)
         }
     }
 

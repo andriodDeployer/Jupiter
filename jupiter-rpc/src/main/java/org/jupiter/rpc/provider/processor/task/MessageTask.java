@@ -82,6 +82,7 @@ public class MessageTask implements RejectedRunnable {
         this.request = request;
     }
 
+    //在业务线程中执行。
     @Override
     public void run() {
         // stack copy

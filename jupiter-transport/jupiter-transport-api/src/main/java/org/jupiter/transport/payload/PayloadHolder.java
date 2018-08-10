@@ -76,7 +76,7 @@ public abstract class PayloadHolder {
 
     // help gc
     public void clear() {
-        bytes = null;
+        bytes = null;//方便gc。否则就是内存泄漏了
         inputBuf = null;
         outputBuf = null;
     }

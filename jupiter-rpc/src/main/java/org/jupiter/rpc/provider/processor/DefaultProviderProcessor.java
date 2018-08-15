@@ -58,9 +58,9 @@ public abstract class DefaultProviderProcessor implements ProviderProcessor, Loo
 
     @Override
     public void handleRequest(JChannel channel, JRequestPayload requestPayload) throws Exception {//执行这个方法在io线程中
-        MessageTask task = new MessageTask(this, channel, new JRequest(requestPayload));//将业务逻辑封装成task里面
-        if (executor == null) {
-            task.run();
+        MessageTask task = new MessageTask(this, channel, new JRequest(requestPayload));//将业务逻辑封装成task里面,在task中完成一个rpc请求的解析，避免了线程安全的问题。
+            if (executor == null) {
+            task.run();//在io线程里面执行task的处理。
         } else {
             executor.execute(task);//executor是一个线程池(业务线程池，防止业务时间过程，耗费io线程时间)
         }

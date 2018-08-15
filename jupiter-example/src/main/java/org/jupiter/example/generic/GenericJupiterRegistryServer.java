@@ -28,7 +28,7 @@ import org.jupiter.registry.RegistryServer;
 public class GenericJupiterRegistryServer {
 
     public static void main(String[] args) {
-        RegistryServer registryServer = RegistryServer.Default.createRegistryServer(20001, 1);      // 注册中心
+        RegistryServer registryServer = RegistryServer.Default.createRegistryServer(20011, 1);      // 注册中心
         MonitorServer monitor = new MonitorServer(19998);                                           // 监控服务
         try {
             monitor.setRegistryMonitor(registryServer);

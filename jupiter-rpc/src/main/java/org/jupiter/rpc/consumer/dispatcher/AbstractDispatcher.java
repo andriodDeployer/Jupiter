@@ -189,7 +189,6 @@ abstract class AbstractDispatcher implements Dispatcher {
         }
 
         final JRequestPayload payload = request.payload();
-
         channel.write(payload, new JFutureListener<JChannel>() {
 
             @Override
@@ -222,6 +221,7 @@ abstract class AbstractDispatcher implements Dispatcher {
                 DefaultInvokeFuture.fakeReceived(channel, response, dispatchType);
             }
         });
+
 
         return future;
     }

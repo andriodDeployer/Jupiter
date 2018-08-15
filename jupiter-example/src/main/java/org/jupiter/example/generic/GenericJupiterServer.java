@@ -59,7 +59,7 @@ public class GenericJupiterServer {
                     .register();
 
 //            server.withGlobalFlowController(); // 全局限流器
-            server.connectToRegistryServer("127.0.0.1:20001");
+            server.connectToRegistryServer("127.0.0.1:20011");
             server.publish(provider);
             server.start();
         } catch (InterruptedException e) {

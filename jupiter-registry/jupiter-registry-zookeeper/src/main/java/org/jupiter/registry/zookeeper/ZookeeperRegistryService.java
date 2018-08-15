@@ -202,7 +202,7 @@ public class ZookeeperRegistryService extends AbstractRegistryService {
                 @Override
                 public void processResult(CuratorFramework client, CuratorEvent event) throws Exception {
                     if (event.getResultCode() == Code.OK.intValue()) {
-                        getRegisterMetaMap().put(meta, RegisterState.DONE);
+                        getRegisterMetaMap().put(meta, RegisterState.DONE);//修改注册成功状态
                     }
 
                     logger.info("Register: {} - {}.", meta, event);

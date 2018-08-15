@@ -41,6 +41,7 @@ public interface JServer extends Registry {
 
     /**
      * 本地服务注册.
+     * 主要就是用来保证service，将一个service包装成ServiceWrapper，同时将生成的serviceWrapper保存到本地容器中。
      */
     interface ServiceRegistry {
 

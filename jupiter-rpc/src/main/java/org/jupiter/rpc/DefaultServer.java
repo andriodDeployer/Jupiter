@@ -282,7 +282,7 @@ public class DefaultServer implements JServer {
         wrapper.setExecutor(executor);
         wrapper.setFlowController(flowController);
 
-        providerContainer.registerService(wrapper.getMetadata().directoryString(), wrapper);
+        providerContainer.registerService(wrapper.getMetadata().directoryString(), wrapper);//保存到本地一份
 
         return wrapper;
     }

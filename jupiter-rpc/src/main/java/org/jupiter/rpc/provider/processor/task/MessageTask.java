@@ -127,9 +127,9 @@ public class MessageTask implements RejectedRunnable {
         }
 
         // provider私有流量控制
-        FlowController<JRequest> childController = service.getFlowController();
+        FlowController<JRequest> childController = service.getFlowController();//每个服务可以单独设置一个流量控制器。
         if (childController != null) {
-            ctrl = childController.flowControl(_request);
+            ctrl = childController.flowControl(_request);//有
             if (!ctrl.isAllowed()) {
                 rejected(Status.PROVIDER_FLOW_CONTROL, new JupiterFlowControlException(String.valueOf(ctrl)));
                 return;
@@ -137,7 +137,7 @@ public class MessageTask implements RejectedRunnable {
         }
 
         // processing
-        Executor childExecutor = service.getExecutor();
+        Executor childExecutor = service.getExecutor();//调用处理线程，也就是该服务专有线程处理
         if (childExecutor == null) {
             process(service);
         } else {
@@ -447,4 +447,6 @@ public class MessageTask implements RejectedRunnable {
         // 请求被拒绝次数统计
         static final Meter rejectionMeter               = Metrics.meter("rejection");
     }
+
+
 }

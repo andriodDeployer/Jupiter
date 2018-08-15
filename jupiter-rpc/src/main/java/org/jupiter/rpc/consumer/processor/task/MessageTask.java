@@ -78,6 +78,6 @@ public class MessageTask implements Runnable {
         }
         _response.result(wrapper);
 
-        DefaultInvokeFuture.received(channel, _response);
+        DefaultInvokeFuture.received(channel, _response);//向future发送消息，告知结果已经返回。之后，future的listener中的回掉会被调用，以及future.get方法也会有返回值了。
     }
 }

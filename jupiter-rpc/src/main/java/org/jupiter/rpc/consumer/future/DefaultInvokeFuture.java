@@ -76,7 +76,7 @@ public class DefaultInvokeFuture<V> extends AbstractListenableFuture<V> implemen
     private DefaultInvokeFuture(
             long invokeId, JChannel channel, long timeoutMillis, Class<V> returnType, DispatchType dispatchType) {
 
-        this.invokeId = invokeId;
+        this.invokeId = invokeId;//标识一次调用的唯一id
         this.channel = channel;
         this.timeout = timeoutMillis > 0 ? TimeUnit.MILLISECONDS.toNanos(timeoutMillis) : DEFAULT_TIMEOUT_NANOSECONDS;
         this.returnType = returnType;

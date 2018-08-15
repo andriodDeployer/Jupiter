@@ -42,7 +42,7 @@ public class GenericJupiterClient {
 
         JClient client = new DefaultClient().withConnector(new JNettyTcpConnector());
         // 连接RegistryServer
-        client.connectToRegistryServer("127.0.0.1:20001");
+        client.connectToRegistryServer("127.0.0.1:20011");
         // 自动管理可用连接
         JConnector.ConnectionWatcher watcher = client.watchConnections(directory);
         // 等待连接可用
@@ -53,7 +53,7 @@ public class GenericJupiterClient {
         GenericInvoker invoker = GenericProxyFactory.factory()
                 .client(client)
                 .directory(directory)
-                .invokeType(InvokeType.ASYNC)
+                .invokeType(InvokeType.SYNC)
                 .newProxyInstance();
 
         try {

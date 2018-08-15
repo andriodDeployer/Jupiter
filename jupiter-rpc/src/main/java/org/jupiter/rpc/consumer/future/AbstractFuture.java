@@ -99,10 +99,10 @@ public abstract class AbstractFuture<V> {
     }
 
     protected void set(V v) {
-        if (UNSAFE.compareAndSwapInt(this, stateOffset, NEW, COMPLETING)) {
+        if (UNSAFE.compareAndSwapInt(this, stateOffset, NEW, COMPLETING)) {//将状态从new->completing，并完成outcome的赋值。
             outcome = v;
             // putOrderedInt在JIT后会通过intrinsic优化掉StoreLoad屏障, 不保证可见性
-            UNSAFE.putOrderedInt(this, stateOffset, NORMAL); // final state
+            UNSAFE.putOrderedInt(this, stateOffset, NORMAL); // final state//将状态从completing->normal
             finishCompletion(v);
         }
     }
@@ -157,7 +157,7 @@ public abstract class AbstractFuture<V> {
             }
         }
 
-        done(state, x);
+        done(state, x);//触发钩子函数，也就是一系列的listeners
     }
 
     /**

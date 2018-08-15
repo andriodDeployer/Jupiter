@@ -53,7 +53,7 @@ public class GenericJupiterClient {
         GenericInvoker invoker = GenericProxyFactory.factory()
                 .client(client)
                 .directory(directory)
-                .invokeType(InvokeType.SYNC)
+                .invokeType(InvokeType.ASYNC)
                 .newProxyInstance();
 
         try {

@@ -230,7 +230,7 @@ public class DefaultInvokeFuture<V> extends AbstractListenableFuture<V> implemen
         }
 
         if (future == null) {
-            return; // 正确结果在超时被处理之前返回
+            return; // 正确结果在超时被处理之前返回,这种情况应该很少有吧，应该打个日志压压惊。
         }
 
         future.doReceived(response);
@@ -240,6 +240,7 @@ public class DefaultInvokeFuture<V> extends AbstractListenableFuture<V> implemen
         return channel.id() + invokeId;
     }
 
+    //使用一个定时器来定时清理超时的future。
     // timeout scanner
     @SuppressWarnings("all")
     private static class TimeoutScanner implements Runnable {
@@ -275,8 +276,8 @@ public class DefaultInvokeFuture<V> extends AbstractListenableFuture<V> implemen
             }
 
             if (System.nanoTime() - future.startTime > future.timeout) {
-                JResponse response = new JResponse(future.invokeId);
-                response.status(future.sent ? Status.SERVER_TIMEOUT : Status.CLIENT_TIMEOUT);
+                JResponse response = new JResponse(future.invokeId);//伪造一个response，主要就是为了将正常返回和超时返回这两种情况进行统一的处理。
+                response.status(future.sent ? Status.SERVER_TIMEOUT : Status.CLIENT_TIMEOUT);//设置状态码。
 
                 DefaultInvokeFuture.fakeReceived(future.channel, response, dispatchType);
             }

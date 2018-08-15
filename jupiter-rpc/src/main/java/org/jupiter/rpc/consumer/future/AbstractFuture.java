@@ -99,10 +99,10 @@ public abstract class AbstractFuture<V> {
     }
 
     protected void set(V v) {
-        if (UNSAFE.compareAndSwapInt(this, stateOffset, NEW, COMPLETING)) {//将状态从new->completing，并完成outcome的赋值。
+        if (UNSAFE.compareAndSwapInt(this, stateOffset, NEW, COMPLETING)) {//将状态从new->completing，并完成outcome的赋值。表示正在处理，多设置一个状态主要就是为了，在使用者在等待的过程中可以，可以看看到个过程的一个演化，当用户想放弃等待的时候的一个斟酌。
             outcome = v;
             // putOrderedInt在JIT后会通过intrinsic优化掉StoreLoad屏障, 不保证可见性
-            UNSAFE.putOrderedInt(this, stateOffset, NORMAL); // final state//将状态从completing->normal
+            UNSAFE.putOrderedInt(this, stateOffset, NORMAL); // final state//将状态从completing->normal，表示处理完成
             finishCompletion(v);
         }
     }

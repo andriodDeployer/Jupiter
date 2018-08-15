@@ -174,7 +174,7 @@ abstract class AbstractDispatcher implements Dispatcher {
     protected <T> DefaultInvokeFuture<T> write(
             final JChannel channel, final JRequest request, final Class<T> returnType, final DispatchType dispatchType) {
         final MessageWrapper message = request.message();
-        final long timeoutMillis = getMethodSpecialTimeoutMillis(message.getMethodName());
+        final long timeoutMillis = getMethodSpecialTimeoutMillis(message.getMethodName());//超时时间
         final ConsumerInterceptor[] interceptors = interceptors();
         final TraceId traceId = message.getTraceId();
         final DefaultInvokeFuture<T> future = DefaultInvokeFuture

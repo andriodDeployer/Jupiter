@@ -83,7 +83,7 @@ public class DefaultInvokeFuture<V> extends AbstractListenableFuture<V> implemen
 
         switch (dispatchType) {
             case ROUND:
-                roundFutures.put(invokeId, this);
+                roundFutures.put(invokeId, this);//把future和这个future对应请求的id。放到一个静态集合中
                 break;
             case BROADCAST:
                 broadcastFutures.put(subInvokeId(channel, invokeId), this);
@@ -215,7 +215,7 @@ public class DefaultInvokeFuture<V> extends AbstractListenableFuture<V> implemen
             return;
         }
 
-        future.doReceived(response);
+        future.doReceived(response);//在另外的一个线程中修改future中的标志位和value的值
     }
 
     public static void fakeReceived(JChannel channel, JResponse response, DispatchType dispatchType) {

@@ -126,7 +126,7 @@ public abstract class AbstractInvoker {
             InvokeFuture<?> future = invoker.invoke(request, returnType);
 
             if (invokeCtx.isSync()) {
-                invokeCtx.setResult(future.getResult());
+                invokeCtx.setResult(future.getResult());//在一个线程中获取future的值。在另一个线程中在收到消息后，对future进行设置。完成异步过程。future模式主要就是两个线程同时持有一个对象。一个线程从对象中取值，另一个线程向对象中放值。
             } else {
                 invokeCtx.setResult(future);
             }

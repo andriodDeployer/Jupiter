@@ -61,6 +61,7 @@ public class GenericJupiterClient {
             System.out.println(result);
             InvokeFuture<Object> future = InvokeFutureContext.future(Object.class);
             System.out.println(future.getResult());
+            System.out.println("结果来了");
         } catch (Throwable e) {
             e.printStackTrace();
         }

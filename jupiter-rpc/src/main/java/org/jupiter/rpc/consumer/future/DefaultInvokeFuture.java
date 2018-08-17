@@ -105,7 +105,8 @@ public class DefaultInvokeFuture<V> extends AbstractListenableFuture<V> implemen
     @Override
     public V getResult() throws Throwable {
         try {
-            return get(timeout, TimeUnit.NANOSECONDS);
+            //return get(timeout, TimeUnit.NANOSECONDS);
+            return get();
         } catch (Signal s) {
             SocketAddress address = channel.remoteAddress();
             if (s == TIMEOUT) {

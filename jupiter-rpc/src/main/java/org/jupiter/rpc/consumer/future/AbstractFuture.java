@@ -51,11 +51,11 @@ public abstract class AbstractFuture<V> {
     protected static final int NORMAL = 2;
     protected static final int EXCEPTIONAL = 3;
 
-    // 正常返回结果或者异常对象, 通过get()获取或者抛出异常, 无volatile修饰, 通过state保证可见性
+    // 正常返回结果或者异常对象, 通过get()获取或者抛出异常, 无volatile修饰, 通过state保证可见性，在report中对outcome是否是异常，进行处理
     private Object outcome;
     // 存放等待线程的Treiber stack
     @SuppressWarnings("unused")
-    private volatile WaitNode waiters;
+    private volatile WaitNode waiters;//一个链表。
 
     public AbstractFuture() {
         this.state = NEW;
@@ -162,6 +162,8 @@ public abstract class AbstractFuture<V> {
 
     /**
      * 等待任务完成或者超时
+     * timed:是否启用超时时间。
+     * nanos：超时时间，最大等待时间。
      */
     private int awaitDone(boolean timed, long nanos) throws InterruptedException {
         // The code below is very delicate, to achieve these goals:
@@ -248,7 +250,7 @@ public abstract class AbstractFuture<V> {
     /**
      * https://en.wikipedia.org/wiki/Treiber_Stack
      */
-    static final class WaitNode {
+    static final class WaitNode {//WaitNode是一个链表的节点，节点中的数据就是thread。
         volatile Thread thread;
         volatile WaitNode next;
 

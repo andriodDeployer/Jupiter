@@ -65,6 +65,7 @@ public abstract class AbstractRegistryService implements RegistryService {
 
     // Consumer已订阅的信息
     private final ConcurrentSet<RegisterMeta.ServiceMeta> subscribeSet = new ConcurrentSet<>();
+
     // Provider已发布的注册信息
     private final ConcurrentMap<RegisterMeta, RegisterState> registerMetaMap = Maps.newConcurrentMap();
 

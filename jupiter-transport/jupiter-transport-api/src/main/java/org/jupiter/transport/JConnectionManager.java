@@ -25,6 +25,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Jupiter的连接管理器, 用于自动管理(按照地址归组)连接.
+ * 用来管理connection的重连，connection按照address进行分组。一个address对应多个connection。
  *
  * jupiter
  * org.jupiter.transport

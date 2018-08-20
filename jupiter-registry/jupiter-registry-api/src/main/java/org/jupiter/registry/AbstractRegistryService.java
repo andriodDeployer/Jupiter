@@ -55,8 +55,11 @@ public abstract class AbstractRegistryService implements RegistryService {
     private final ConcurrentMap<RegisterMeta.ServiceMeta, RegisterValue> registries =
             Maps.newConcurrentMap();
 
+    //服务和在这个服务上的订阅监听s。
     private final ConcurrentMap<RegisterMeta.ServiceMeta, CopyOnWriteArrayList<NotifyListener>> subscribeListeners =
             Maps.newConcurrentMap();
+
+    //地址和在这个地址上的掉线监听
     private final ConcurrentMap<RegisterMeta.Address, CopyOnWriteArrayList<OfflineListener>> offlineListeners =
             Maps.newConcurrentMap();
 

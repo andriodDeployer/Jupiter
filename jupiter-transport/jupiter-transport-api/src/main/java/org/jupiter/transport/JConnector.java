@@ -71,7 +71,7 @@ public interface JConnector<C> extends Transporter {
     /**
      * Adds a {@link JChannelGroup} by {@link Directory}.
      */
-    boolean addChannelGroup(Directory directory, JChannelGroup group);
+    boolean addChannelGroup(Directory directory, JChannelGroup group);//主要是为了实现负载均衡
 
     /**
      * Removes a {@link JChannelGroup} by {@link Directory}.

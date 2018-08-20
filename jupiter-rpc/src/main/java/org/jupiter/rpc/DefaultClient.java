@@ -121,7 +121,7 @@ public class DefaultClient implements JClient {
 
     @Override
     public JConnector.ConnectionWatcher watchConnections(final Directory directory) {
-        JConnector.ConnectionWatcher manager = new JConnector.ConnectionWatcher() {
+        JConnector.ConnectionWatcher manager = new JConnector.ConnectionWatcher() { //匿名内部类
 
             private final JConnectionManager connectionManager = connector.connectionManager();
 
@@ -132,7 +132,7 @@ public class DefaultClient implements JClient {
 
             @Override
             public void start() {
-                subscribe(directory, new NotifyListener() {
+                subscribe(directory, new NotifyListener() {//匿名内部类
 
                     @Override
                     public void notify(RegisterMeta registerMeta, NotifyEvent event) {
@@ -180,7 +180,8 @@ public class DefaultClient implements JClient {
                         }
                     }
 
-                    private JConnection[] connectTo(final UnresolvedAddress address, final JChannelGroup group, RegisterMeta registerMeta, boolean async) {
+                    private JConnection[] connectTo(final UnresolvedAddress address, final JChannelGroup group,
+                                                    RegisterMeta registerMeta, boolean async) {
                         int connCount = registerMeta.getConnCount(); // global value from single client
                         connCount = connCount < 1 ? 1 : connCount;
 
@@ -251,7 +252,7 @@ public class DefaultClient implements JClient {
             }
         };
 
-        manager.start();
+        manager.start();//获取到指定服务的地址，然后去异步连接。
 
         return manager;
     }

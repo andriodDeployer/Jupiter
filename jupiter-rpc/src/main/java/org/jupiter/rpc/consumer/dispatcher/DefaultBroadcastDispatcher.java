@@ -51,7 +51,7 @@ public class DefaultBroadcastDispatcher extends AbstractDispatcher {
         final Serializer _serializer = serializer();
         final MessageWrapper message = request.message();
 
-        JChannelGroup[] groups = groups(message.getMetadata());
+        JChannelGroup[] groups = groups(message.getMetadata());//获取一个服务的所有provider。
         JChannel[] channels = new JChannel[groups.length];
         for (int i = 0; i < groups.length; i++) {
             channels[i] = groups[i].next();

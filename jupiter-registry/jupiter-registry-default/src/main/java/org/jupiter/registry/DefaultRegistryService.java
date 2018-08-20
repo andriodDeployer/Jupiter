@@ -44,6 +44,7 @@ public class DefaultRegistryService extends AbstractRegistryService {
 
     private static final InternalLogger logger = InternalLoggerFactory.getInstance(DefaultRegistryService.class);
 
+    //注册中心地址和注册中心客户端
     private final ConcurrentMap<UnresolvedAddress, DefaultRegistry> clients = Maps.newConcurrentMap();
 
     @Override
@@ -52,7 +53,7 @@ public class DefaultRegistryService extends AbstractRegistryService {
         checkArgument(!allClients.isEmpty(), "init needed");
 
         logger.info("Subscribe: {}.", serviceMeta);
-
+        //想每个注册中心都进行注册。
         for (DefaultRegistry c : allClients) {
             c.doSubscribe(serviceMeta);
         }

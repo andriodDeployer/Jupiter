@@ -42,6 +42,9 @@ import java.nio.ByteBuffer;
  * jupiter
  * org.jupiter.transport.netty.channel
  *
+ * nettyChannel这个类是对netty中的channel进行封装
+ *
+ *
  * @author jiachun.fjc
  */
 public class NettyChannel implements JChannel {
@@ -50,6 +53,7 @@ public class NettyChannel implements JChannel {
 
     /**
      * Returns the {@link NettyChannel} for given {@link Channel}, this method never return null.
+     * 将一个nettyChannel绑定到到一个channel上
      */
     public static NettyChannel attachChannel(Channel channel) {
         Attribute<NettyChannel> attr = channel.attr(NETTY_CHANNEL_KEY);

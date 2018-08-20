@@ -165,7 +165,9 @@ public class BenchmarkClient {
                 .addProviderAddress(addresses)
                 .newProxyInstance();
 
-        for (int i = 0; i < 10000; i++) {
+//        int count1 = 10000;
+        int count1 = 10;
+        for (int i = 0; i < count1; i++) {
             try {
                 service.hello("jupiter");
                 InvokeFutureContext.future().getResult();

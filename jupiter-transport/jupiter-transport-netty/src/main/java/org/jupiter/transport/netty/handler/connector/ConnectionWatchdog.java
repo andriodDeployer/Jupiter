@@ -73,6 +73,7 @@ public abstract class ConnectionWatchdog extends ChannelInboundHandlerAdapter im
         state = ST_STOPPED;
     }
 
+    //当连接建立成功之后，将连接放到group中
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         Channel ch = ctx.channel();

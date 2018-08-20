@@ -60,7 +60,7 @@ public abstract class NettyConnector implements JConnector<JConnection> {
     protected final Protocol protocol;
     protected final HashedWheelTimer timer = new HashedWheelTimer(new NamedThreadFactory("connector.timer", true));
 
-    private final ConcurrentMap<UnresolvedAddress, JChannelGroup> addressGroups = Maps.newConcurrentMap();
+    private final ConcurrentMap<UnresolvedAddress, JChannelGroup> addressGroups = Maps.newConcurrentMap();//一个address对应一个channelGroup,channelGroup中对应这个这个addreass上的所有channel
     private final DirectoryJChannelGroup directoryGroup = new DirectoryJChannelGroup();
     private final JConnectionManager connectionManager = new JConnectionManager();
 

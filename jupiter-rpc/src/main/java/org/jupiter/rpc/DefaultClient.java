@@ -140,7 +140,7 @@ public class DefaultClient implements JClient {
                         final JChannelGroup group = connector.group(address);
                         if (event == NotifyEvent.CHILD_ADDED) {
                             if (group.isAvailable()) {
-                                onSucceed(group, signalNeeded.getAndSet(false));
+                                onSucceed(group, signalNeeded.getAndSet(false));//通知client的等待线程，可以开始工作了
                             } else {
                                 if (group.isConnecting()) {
                                     group.onAvailable(new Runnable() {
@@ -152,7 +152,7 @@ public class DefaultClient implements JClient {
                                     });
                                 } else {
                                     group.setConnecting(true);
-                                    JConnection[] connections = connectTo(address, group, registerMeta, true);
+                                    JConnection[] connections = connectTo(address, group, registerMeta, true);//针对一个provider进行连接
                                     final AtomicInteger countdown = new AtomicInteger(connections.length);
                                     for (JConnection c : connections) {
                                         c.operationComplete(new JConnection.OperationListener() {

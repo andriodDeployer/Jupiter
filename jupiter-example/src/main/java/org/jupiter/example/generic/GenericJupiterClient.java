@@ -50,7 +50,7 @@ public class GenericJupiterClient {
             throw new ConnectFailedException();
         }
 
-        System.out.println("连接已经可用");
+        System.out.println("连接已经可用111");
         CopyOnWriteGroupList directory1 = client.connector().directory(directory);
         JChannelGroup[] snapshot =directory1.getSnapshot();
         if(snapshot.length>0){

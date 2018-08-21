@@ -316,7 +316,7 @@ public final class DefaultRegistryServer extends NettyTcpAcceptor implements Reg
         }
 
         final Message msg = new Message(serializerType.value());
-        msg.messageCode(JProtocolHeader.PUBLISH_SERVICE);
+        msg.messageCode(JProtocolHeader.PUBLISH_SERVICE);//向consumer回复的订阅数据的消息码为PUBLISH_SERVICE
         msg.version(config.getVersion()); // 版本号
         List<RegisterMeta> registerMetaList = Lists.newArrayList(config.getConfig().values());
         // 每次发布服务都是当前meta的全量信息
@@ -592,8 +592,8 @@ public final class DefaultRegistryServer extends NettyTcpAcceptor implements Reg
 
                         break;
                     case JProtocolHeader.SUBSCRIBE_SERVICE:
-                        handleSubscribe((RegisterMeta.ServiceMeta) obj.data(), ch);
-                        ch.writeAndFlush(new Acknowledge(obj.sequence())) // 回复ACK
+                        handleSubscribe((RegisterMeta.ServiceMeta) obj.data(), ch);//将订阅的结果发送过去
+                        ch.writeAndFlush(new Acknowledge(obj.sequence())) // 然后回复回复ACK
                                 .addListener(ChannelFutureListener.FIRE_EXCEPTION_ON_FAILURE);
 
                         break;
@@ -708,7 +708,7 @@ public final class DefaultRegistryServer extends NettyTcpAcceptor implements Reg
                                 MessageNonAck msgNonAck = new MessageNonAck(m.serviceMeta, m.msg, m.channel);
                                 messagesNonAck.put(msgNonAck.id, msgNonAck);
                                 m.channel.writeAndFlush(m.msg)
-                                        .addListener(ChannelFutureListener.FIRE_EXCEPTION_ON_FAILURE);
+                                        .addListener(ChannelFutureListener.FIRE_EXCEPTION_ON_FAILURE);//超时重发
                             }
                         }
                     }

@@ -241,7 +241,7 @@ public abstract class AbstractRegistryService implements RegistryService {
             return;
         }
 
-        RegisterValue value = registries.get(serviceMeta);
+        RegisterValue value = registries.get(serviceMeta);//将订阅的信息放到registries中
         if (value == null) {
             RegisterValue newValue = new RegisterValue();
             value = registries.putIfAbsent(serviceMeta, newValue);

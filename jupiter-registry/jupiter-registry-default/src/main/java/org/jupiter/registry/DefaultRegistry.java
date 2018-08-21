@@ -256,7 +256,7 @@ public final class DefaultRegistry extends NettyTcpConnector {
         return registerMetaSet.add(meta);
     }
 
-    // 在channel打标记(订阅过的服务)
+    // 在channel打标记(将要去订阅的服务)
     private static boolean attachSubscribeEventOnChannel(RegisterMeta.ServiceMeta serviceMeta, Channel channel) {
         Attribute<ConcurrentSet<RegisterMeta.ServiceMeta>> attr = channel.attr(C_SUBSCRIBE_KEY);
         ConcurrentSet<RegisterMeta.ServiceMeta> serviceMetaSet = attr.get();
@@ -267,7 +267,6 @@ public final class DefaultRegistry extends NettyTcpConnector {
                 serviceMetaSet = newServiceMetaSet;
             }
         }
-
         return serviceMetaSet.add(serviceMeta);
     }
 
@@ -566,13 +565,13 @@ public final class DefaultRegistry extends NettyTcpConnector {
 
                             // 移除
                             if (messagesNonAck.remove(m.id) == null) {
-                                continue;
+                                continue;//在移除的过程中，被其他线程给删除掉了。
                             }
 
                             MessageNonAck msgNonAck = new MessageNonAck(m.msg);
                             messagesNonAck.put(msgNonAck.id, msgNonAck);
                             channel.writeAndFlush(m.msg)
-                                    .addListener(ChannelFutureListener.FIRE_EXCEPTION_ON_FAILURE);
+                                    .addListener(ChannelFutureListener.FIRE_EXCEPTION_ON_FAILURE);//将消息重新发送。
                         }
                     }
 

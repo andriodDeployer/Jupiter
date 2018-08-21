@@ -44,7 +44,7 @@ public class DefaultRegistryService extends AbstractRegistryService {
 
     private static final InternalLogger logger = InternalLoggerFactory.getInstance(DefaultRegistryService.class);
 
-    //注册中心地址和注册中心客户端
+    //注册中心地址和注册中心客户端,在consumer中一个注册中心对应一个DefultRegistry，在每个defaultRegistry中有且仅有一个channel实例
     private final ConcurrentMap<UnresolvedAddress, DefaultRegistry> clients = Maps.newConcurrentMap();
 
     @Override
@@ -53,7 +53,7 @@ public class DefaultRegistryService extends AbstractRegistryService {
         checkArgument(!allClients.isEmpty(), "init needed");
 
         logger.info("Subscribe: {}.", serviceMeta);
-        //想每个注册中心都进行注册。
+        //想每个注册中心都进行订阅。为了防止有些服务提供者执行某个注册中心进行了注册，也就是说，同一服务的注册信息不是在每个注册中心都有。
         for (DefaultRegistry c : allClients) {
             c.doSubscribe(serviceMeta);
         }

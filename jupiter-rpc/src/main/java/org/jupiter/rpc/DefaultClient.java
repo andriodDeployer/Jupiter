@@ -135,7 +135,7 @@ public class DefaultClient implements JClient {
                 subscribe(directory, new NotifyListener() {//匿名内部类
 
                     @Override
-                    public void notify(RegisterMeta registerMeta, NotifyEvent event) {
+                    public void notify(RegisterMeta registerMeta, NotifyEvent event) {//同一个服务的每个provider调用一次
                         UnresolvedAddress address = new UnresolvedAddress(registerMeta.getHost(), registerMeta.getPort());
                         final JChannelGroup group = connector.group(address);
                         if (event == NotifyEvent.CHILD_ADDED) {
@@ -193,6 +193,7 @@ public class DefaultClient implements JClient {
                             connectionManager.manage(connection);
                         }
 
+                        //设置掉线监听
                         offlineListening(address, new OfflineListener() {
 
                             @Override

@@ -17,12 +17,7 @@
 package org.jupiter.example.generic;
 
 import org.jupiter.rpc.DefaultClient;
-import org.jupiter.rpc.InvokeType;
 import org.jupiter.rpc.JClient;
-import org.jupiter.rpc.consumer.GenericProxyFactory;
-import org.jupiter.rpc.consumer.future.InvokeFuture;
-import org.jupiter.rpc.consumer.future.InvokeFutureContext;
-import org.jupiter.rpc.consumer.invoker.GenericInvoker;
 import org.jupiter.rpc.model.metadata.ServiceMetadata;
 import org.jupiter.transport.Directory;
 import org.jupiter.transport.JConnector;
@@ -50,20 +45,30 @@ public class GenericJupiterClient {
             throw new ConnectFailedException();
         }
 
-        GenericInvoker invoker = GenericProxyFactory.factory()
-                .client(client)
-                .directory(directory)
-                .invokeType(InvokeType.ASYNC)
-                .newProxyInstance();
-
+        System.out.println("连接已经可用");
         try {
-            Object result = invoker.$invoke("sayHello", "Luca");
-            System.out.println(result);
-            InvokeFuture<Object> future = InvokeFutureContext.future(Object.class);
-            System.out.println(future.getResult());
-            System.out.println("结果来了");
-        } catch (Throwable e) {
+            Thread.sleep(10*1000);
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+//        GenericInvoker invoker = GenericProxyFactory.factory()
+//                .client(client)
+//                .directory(directory)
+//                .invokeType(InvokeType.ASYNC)
+//                .newProxyInstance();
+//
+//        try {
+//            Object result = invoker.$invoke("sayHello", "Luca");
+//            System.out.println(result);
+//            InvokeFuture<Object> future = InvokeFutureContext.future(Object.class);
+//            System.out.println(future.getResult());
+//            System.out.println("结果来了");
+//        } catch (Throwable e) {
+//            e.printStackTrace();
+//        }
+//
+
+
     }
 }

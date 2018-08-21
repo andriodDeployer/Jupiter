@@ -586,6 +586,6 @@ public final class DefaultRegistry extends NettyTcpConnector {
     {
         Thread t = new Thread(new AckTimeoutScanner(), "ack.timeout.scanner");
         t.setDaemon(true);
-        //t.start();
+        t.start();
     }
 }

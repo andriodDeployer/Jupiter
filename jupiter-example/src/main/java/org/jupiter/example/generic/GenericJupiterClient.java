@@ -21,8 +21,13 @@ import org.jupiter.rpc.JClient;
 import org.jupiter.rpc.model.metadata.ServiceMetadata;
 import org.jupiter.transport.Directory;
 import org.jupiter.transport.JConnector;
+import org.jupiter.transport.channel.CopyOnWriteGroupList;
+import org.jupiter.transport.channel.JChannel;
+import org.jupiter.transport.channel.JChannelGroup;
 import org.jupiter.transport.exception.ConnectFailedException;
 import org.jupiter.transport.netty.JNettyTcpConnector;
+
+import java.util.List;
 
 /**
  * jupiter
@@ -46,10 +51,12 @@ public class GenericJupiterClient {
         }
 
         System.out.println("连接已经可用");
-        try {
-            Thread.sleep(10*1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        CopyOnWriteGroupList directory1 = client.connector().directory(directory);
+        JChannelGroup[] snapshot =directory1.getSnapshot();
+        if(snapshot.length>0){
+            JChannelGroup jChannelGroup = snapshot[0];
+            List<? extends JChannel> channels = jChannelGroup.channels();
+            System.out.println(channels.size());
         }
 
 //        GenericInvoker invoker = GenericProxyFactory.factory()

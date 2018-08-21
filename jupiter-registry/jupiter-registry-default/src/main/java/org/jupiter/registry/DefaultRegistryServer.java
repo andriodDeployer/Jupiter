@@ -726,6 +726,6 @@ public final class DefaultRegistryServer extends NettyTcpAcceptor implements Reg
     {
         Thread t = new Thread(new AckTimeoutScanner(), "ack.timeout.scanner");
         t.setDaemon(true);
-        t.start();
+        //t.start();
     }
 }

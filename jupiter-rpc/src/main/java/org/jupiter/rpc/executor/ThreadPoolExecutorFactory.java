@@ -57,7 +57,7 @@ public class ThreadPoolExecutorFactory extends AbstractExecutorFactory {
 
             @Override
             public void execute(Runnable r) {
-                executor.execute(r);
+                executor.execute(r);//在业务线程中调用
             }
 
             @Override

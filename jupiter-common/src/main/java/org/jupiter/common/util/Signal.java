@@ -90,7 +90,7 @@ public final class Signal extends Exception implements Constant<Signal> {
 
     @Override
     public Throwable fillInStackTrace() {
-        return this;
+        return this;//没有记录堆栈信息。这个异常仅仅做为goto语句使用。
     }
 
     @Override

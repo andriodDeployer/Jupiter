@@ -44,6 +44,7 @@ public class ThreadPoolExecutorFactory extends AbstractExecutorFactory {
 
     @Override
     public CloseableExecutor newExecutor(Target target, String name) {
+        //ThreadPoolExecutor可以理解对ThreadFactory的一种封装，或者说管理，将ThreadFactory产生的Thread进行管理，比如说什么时候创建，创建多少个等。
         final ThreadPoolExecutor executor = new ThreadPoolExecutor(
                 coreWorkers(target),
                 maxWorkers(target),

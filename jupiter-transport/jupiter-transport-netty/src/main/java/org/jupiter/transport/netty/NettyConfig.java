@@ -155,6 +155,7 @@ public class NettyConfig implements JConfig {
 
         /**
          * TCP netty parent option
+         * 主要设置TCP的三个参数backlog，rcvBuf,和reuseAddress三个参数
          */
         public static class ParentConfig extends NettyConfig {
 
